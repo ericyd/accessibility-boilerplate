@@ -1,10 +1,10 @@
 /**
  * Dynamically generate tests and fixtures based on config options
  */
-import { Selector } from 'testcafe';
+import { Selector }   from 'testcafe';
 import getScreenshots from './testcafe-get-screenshots';
-import getHTML from './testcafe-get-html';
-import config from '../config';
+import getHTML        from './testcafe-get-html';
+import config         from '../config';
 const singlePage = config.singlePage && config.singlePage !== '';
 
 

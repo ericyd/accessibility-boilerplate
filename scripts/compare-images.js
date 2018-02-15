@@ -10,17 +10,17 @@ the mochawesome reporter is very helpful for inserting the diff screenshots. Inv
 other methods to generate reports.
 =========================================================== */
 
-const fs = require('fs');
-const path = require('path');
-const assert = require('assert');
-const rimraf = require('rimraf');
-const open = require('open');
-const BlinkDiff = require('blink-diff');
-const addContext = require('mochawesome/addContext');
+const fs          = require('fs');
+const path        = require('path');
+const assert      = require('assert');
+const rimraf      = require('rimraf');
+const open        = require('open');
+const BlinkDiff   = require('blink-diff');
+const addContext  = require('mochawesome/addContext');
 const expectedDir = path.resolve(path.dirname(__dirname), 'screenshots', 'expected');
-const actualDir = path.resolve(path.dirname(__dirname), 'screenshots', 'actual');
-const resultDir = path.resolve(path.dirname(__dirname), 'screenshots', 'result');
-const config = require('../config');
+const actualDir   = path.resolve(path.dirname(__dirname), 'screenshots', 'actual');
+const resultDir   = path.resolve(path.dirname(__dirname), 'screenshots', 'result');
+const config      = require('../config');
 let files;
 
 

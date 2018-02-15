@@ -1,9 +1,9 @@
 
-const fs = require('fs');
-const path = require('path');
+const fs             = require('fs');
+const path           = require('path');
 const createTestCafe = require('testcafe');
-const config = require('../config');
-let testcafe = null;
+const config         = require('../config');
+let testcafe         = null;
 require('./add-directories'); // runs on `require`
 
 createTestCafe('localhost', 1337, 1338)
