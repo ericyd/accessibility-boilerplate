@@ -1,0 +1,49 @@
+mixin file(file)
+	//- data-toggle-icons="true" if including plus/minus icons
+	.filename
+		h1(data-toggle-element=file.name onclick="toggleNextBlock(event)") #{file.documentTitle}<br />#{file.name}
+		h4
+			each category in file.categories
+				span(class="category-pill " + category.resultType) #{category.principles.length} #{category.title}
+	div.collapsed(id=file.name)
+		each category in file.categories
+			+category(category, file.name)
+
+mixin category(category, filename)
+	h2(class="category-header " + category.resultType data-toggle-element=filename + category.resultType onclick="toggleNextBlock(event)") #{category.title} (#{category.principles.length})
+	div(class="collapsed" id=filename + category.resultType)
+		each principle, i in category.principles
+			+principle(principle, filename + principle.code + i)
+
+mixin principle(principle, id)
+	h3(data-toggle-element=id onclick="toggleNextBlock(event)") #{principle.title.principle} &gt; #{principle.title.guideline} &gt; #{principle.title.rule} (#{principle.instances.length})
+	//- p #{principle.code}
+	p.indent-h3 #{principle.message}
+	div.collapsed(id=id)
+		each instance, j in principle.instances
+			+result(instance, id + j)
+
+mixin result(result, id)
+	- className=".indent-h3 result " + result.type;
+	div(class=className)
+		h4 #{result.context}
+		h4 #{result.selector}
+		//- p #{result.message}
+
+
+doctype html
+html
+	head
+		title Accessibility audit results
+		style
+			include styles.css
+		script
+			include scripts.js
+	body
+		header.header
+			h1 Accessibility audit results
+			p Courtesy of 
+				a(href="https://github.com/pa11y/pa11y", target="_blank") pa11y
+		each file in files
+			.file
+				+file(file)
