@@ -24,7 +24,10 @@ Ideally, the only thing you should have to touch is the `config.js` file in the 
 After that, you have some scripts to choose from:
 * `npm t`: runs all test scripts, see [running tests](#running-tests) for more details
 * `npm run cleanup`: deletes any captured screenshots and html
-* 
+* `npm run capture`: captures screenshots and/or html
+* `npm run wcag`: runs accessibility audit and renders report
+* `npm run compare`: compares images from `screenshots/actual` to `screenshots/expected` and tests for similarity
+* `npm run open`: opens the reports
 
 
 
