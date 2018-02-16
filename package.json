@@ -9,21 +9,36 @@
   "scripts": {
     "cleanup": "node ./scripts/cleanup.js",
     "capture": "node ./scripts/testcafe-runner.js",
-    "compare": "mocha ./scripts/compare-images.js --reporter mochawesome",
+    "compare": "jest ./scripts/compare-images-jest.js",
+    "compare:jest": "jest ./scripts/compare-images-jest.js",
+    "compare:ava": "ava scripts/compare-images-ava.js",
+    "compare:mocha": "mocha ./scripts/compare-images-mocha.js --reporter mochawesome",
     "wcag": "node ./scripts/accessibility-runner.js",
     "open": "node ./scripts/open-results.js",
     "test": "npm run cleanup && npm run capture && npm run wcag && npm run compare"
   },
   "devDependencies": {},
   "dependencies": {
+    "ava": "^1.0.0-beta.3",
     "blink-diff": "^1.0.13",
+    "jest": "^22.3.0",
     "mocha": "^4.0.1",
     "mochawesome": "^3.0.0",
     "open": "0.0.5",
     "pa11y": "^5.0.0-beta.10",
+    "pixelmatch": "^4.0.2",
+    "pngjs": "^3.3.2",
+    "promisify-node": "^0.4.0",
     "pug": "^2.0.0-rc.4",
     "rimraf": "^2.6.2",
     "testcafe": "^0.18.5"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      "./scripts/myJestReporter.js"
+    ],
+    "testResultsProcessor": "./scripts/myTestResultsProcessor.js"
   },
   "repository": {
     "type": "git",
