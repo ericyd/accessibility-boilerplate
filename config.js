@@ -24,7 +24,7 @@ module.exports = {
     screenshotDir: 'screenshots/actual',
 
     // specify single page for test
-    // singlePage: 'http://www.duckduckgo.com/',
+    singlePage: 'http://beta.coralsales.com/',
 
     // definitions for public pages
     public: {

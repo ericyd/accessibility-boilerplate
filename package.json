@@ -15,12 +15,13 @@
     "compare:mocha": "mocha ./scripts/compare-images-mocha.js --reporter mochawesome",
     "wcag": "node ./scripts/accessibility-runner.js",
     "open": "node ./scripts/open-results.js",
-    "test": "npm run cleanup && npm run capture && npm run wcag && npm run compare"
+    "test": "npm run cleanup && npm run capture && npm run wcag && npm run compare:mocha"
   },
   "devDependencies": {},
   "dependencies": {
     "ava": "^1.0.0-beta.3",
     "blink-diff": "^1.0.13",
+    "chai": "^4.1.2",
     "jest": "^22.3.0",
     "mocha": "^4.0.1",
     "mochawesome": "^3.0.0",
