@@ -4,10 +4,6 @@ Compared files from ./screenshots/expected to ./screenshots/actual.
 
 When TestCafe scripts are run, they should output screenshots to ./screenshots/actual,
 or the config object can be updated.
-
-TODO: parallel test runners like Jest or Ava would make this a billion times faster, but
-the mochawesome reporter is very helpful for inserting the diff screenshots. Investigate
-other methods to generate reports.
 =========================================================== */
 
 const fs          = require('fs');
@@ -15,7 +11,8 @@ const path        = require('path');
 const assert      = require('assert');
 const rimraf      = require('rimraf');
 const open        = require('open');
-const BlinkDiff   = require('blink-diff');
+const pixelmatch  = require('pixelmatch');
+const PNG         = require('pngjs').PNG;
 const addContext  = require('mochawesome/addContext');
 const expectedDir = path.resolve(path.dirname(__dirname), 'screenshots', 'expected');
 const actualDir   = path.resolve(path.dirname(__dirname), 'screenshots', 'actual');
@@ -60,30 +57,47 @@ describe('screenshot comparisons', function() {
                 done();
             }
 
-            // setup diff
-            var diff = new BlinkDiff({
-                imageAPath: expectedFilePath,
-                imageBPath: actualFilePath,
-                imageOutputPath: resultFilePath,
-                thresholdType: BlinkDiff.THRESHOLD_PERCENT,
-                threshold: 0.01 // 1% threshold
-            });
+            /* using pixelmatch */
+            compareScreenshots(expectedFilePath, actualFilePath, resultFilePath)
+                .then(numDiffPixels => {
+                    addContext(_this, `diff file: "${resultFilePath}"`);
+                    addContext(_this, `file:///${resultFilePath}`);
 
-            // compare the files
-            diff.run(function (error, result) {
-                if (error) console.error(error);
-
-                // display the diff file in each test, since it is already generated and we have a reference to it
-                // context can be an image url and the report will show it inline
-                addContext(_this, `diff file: "${resultFilePath}"`);
-                addContext(_this, `file:///${resultFilePath}`);
-
-                assert(diff.hasPassed(result.code), `diff did not pass for ${file}`);
-
-                done();
-            });
+                    assert.equal(numDiffPixels, 0, `${file} doesn't match the expected screenshot`);
+                    done();
+                })
+                .catch(done);
         });
     });
 });
 
 console.info("Run `npm run open` to view your results after this script completes!");
+
+
+
+function compareScreenshots(expectedFilePath, actualFilePath, resultFilePath) {
+    return new Promise((resolve, reject) => {
+        
+        const img1 = fs.createReadStream(actualFilePath).pipe(new PNG()).on('parsed', doneReading);
+        const img2 = fs.createReadStream(expectedFilePath).pipe(new PNG()).on('parsed', doneReading);
+  
+        let filesRead = 0;
+        function doneReading() {
+            // Wait until both files are read.
+            if (++filesRead < 2) return;
+
+            // Do the visual diff.
+            const diff = new PNG({width: img1.width, height: img2.height});
+            const numDiffPixels = pixelmatch(
+                img1.data, img2.data, diff.data, img1.width, img1.height,
+                {threshold: 0.1}
+            );
+
+            // write output to file
+            diff.pack().pipe(fs.createWriteStream(resultFilePath));
+
+            resolve(numDiffPixels);
+        }
+    });
+  }
+  
