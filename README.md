@@ -205,3 +205,17 @@ These are all the possible options
 	]
 	```
 
+
+## Dependencies
+
+These scripts contain almost 0% original content.
+They make extensive use of the following libraries (also feel free to check out the `package.json`);
+
+* [TestCafe](http://devexpress.github.io/testcafe/): Browser automation, screenshot capture
+* [pa11y](https://github.com/pa11y/pa11y): Accessibility testing
+* [pixelmatch](https://github.com/mapbox/pixelmatch): image diffing (tells if screenshots match);
+	* Note: I personally prefer the output diffs from [blink-diff](https://github.com/yahoo/blink-diff) but pixelmatch is about 2-10 times faster so I chose that.
+	You can refer to [this commit](https://github.com/ericyd/wcag-visreg/blob/a278c0ccd5928da52d771b0cefda625cba36dd7b/scripts/compare-images.js)
+	if you want to see an implementation that uses blink-diff.
+* [mocha](https://mochajs.org/): test runner
+* [mochawesome](https://github.com/adamgruber/mochawesome): excellent report generator with ability to inline image results
