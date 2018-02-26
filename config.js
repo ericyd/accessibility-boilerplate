@@ -20,8 +20,12 @@ module.exports = {
     // when true, will not capture page HTML or run accessibility audit
     // skipWCAG: true,
 
-    // directory to which screenshots will be saved
-    screenshotDir: 'screenshots/actual',
+    // directories to which screenshots will be saved
+    screenshots: {
+        expected: 'screenshots/expected',
+        actual: 'screenshots/actual',
+        diff: 'screenshots/result'
+    },
 
     // specify single page for test
     // singlePage: 'http://www.duckduckgo.com/',

@@ -7,9 +7,9 @@ const fs = require('fs');
 const directoriesToAdd = [
     'screenshots',
     'html',
-    'screenshots/actual',
-    'screenshots/result',
-    'screenshots/expected'
+    config.screenshots.actual,
+    config.screenshots.expected,
+    config.screenshots.diff
 ]
 
 directoriesToAdd.forEach(dir => {

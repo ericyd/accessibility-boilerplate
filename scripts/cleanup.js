@@ -3,11 +3,12 @@
  */
 
 const rimraf = require('rimraf');
+const config = require('../config');
 
 const directoriesToRemove = [
     'html',
-    'screenshots/actual',
-    'screenshots/result'
+    config.screenshots.actual,
+    config.screenshots.diff
 ]
 
 directoriesToRemove.forEach(dir => {

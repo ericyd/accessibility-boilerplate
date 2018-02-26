@@ -9,6 +9,7 @@
   "scripts": {
     "cleanup": "node ./scripts/cleanup.js",
     "capture": "node ./scripts/testcafe-runner.js",
+    "capture:expected": "node ./scripts/testcafe-runner.js expected",
     "compare": "mocha ./scripts/compare-images.js --reporter mochawesome",
     "wcag": "node ./scripts/accessibility-runner.js",
     "open": "node ./scripts/open-results.js",

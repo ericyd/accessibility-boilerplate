@@ -1,9 +1,7 @@
 /* ===========================================================
-Test runner to perform image comparison on all screenshots captured.
-Compared files from ./screenshots/expected to ./screenshots/actual.
+Test runner to perform accessibility audits on saved HTML files.
 
-When TestCafe scripts are run, they should output screenshots to ./screenshots/actual,
-or the config object can be updated.
+Runs `pa11y` auditor on all files in the /html directory
 =========================================================== */
 
 // dependencies

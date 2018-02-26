@@ -26,52 +26,18 @@ After that, you have some scripts to choose from:
 * `npm run cleanup`: deletes any captured screenshots and html
 * `npm run capture`: captures screenshots and/or html
 * `npm run wcag`: runs accessibility audit and renders report
-* `npm run compare`: compares images from `screenshots/actual` to `screenshots/expected` and tests for similarity
+* `npm run compare`: compares images from `config.screenshots.actual` to `config.screenshots.expected` and tests for similarity
 * `npm run open`: opens the reports
 
 
 
 ## Adding expected images
 
-1. Update the screenshots directory in `config.js` 
-2. `npm run capture`
-3. Reset `config.js`
+Run: `npm run capture:expected`
 
-### Step 1: Update the screenshots directory in `config.js` 
+This script will run through all pages in the `config.js` file and save them to `config.screenshots.expected`.
 
-Visual regression testing assumes that there is an expected standard against which the new UI will be compared.
-
-These screenshots will need to be recorded and optionally saved for future test runs.
-
-At this time, the method to save the "expected" images is to change the `./config.js` file to point the screenshotsDir to `screenshots/expected`.
-
-```js
-// default config.js
-module.exports = {
-	...
-	screenshotDir: 'screenshots/actual',
-	...
-}
-```
-
-```js
-// modified config.js for saving your expected UI screenshots
-module.exports = {
-	...
-	// in addition to screenshots, change any other info necessary if using different environments
-	screenshotDir: 'screenshots/expected',
-	...
-}
-```
-
-### Step 2: `npm run capture`
-
-Then run `npm run capture` to capture the screenshots.
-
-### Step 3: Reset `config.js`
-
-After running, change screenshotsDir back to `screenshots/actual`.
-
+By contrast, the script `npm run capture` will save screenshots to `config.screenshots.actual`.
 
 
 
@@ -81,8 +47,8 @@ After running, change screenshotsDir back to `screenshots/actual`.
 
 This will do the following:
 1. Delete HTML and screenshots that were saved during the last test run
-2. Capture screenshots and HTML from the pages specified in `./config.js`
-3. Compare screenshots in `screenshots/actual` to `screenshots/expected` and fail any that do not match
+2. Capture screenshots and HTML from the pages specified in `config.js`
+3. Compare screenshots in `config.screenshots.actual` to `config.screenshots.expected` and fail any that do not match
 4. Run an accessibility audit using [pa11y](https://github.com/pa11y/pa11y) on the saved HTML files and generate an issues report
 
 When the test script is done, you can run `npm run open` to quickly open the reports.
@@ -95,7 +61,7 @@ Most of the manual adjustments should happen in the `config.js` file in the dire
 
 These are all the possible options
 
-* **browsers** `<Array<string>>`
+* **browsers** `<string[]>`
 
 	An array of browsers to use in the tests. [Full options in documentation](https://devexpress.github.io/testcafe/documentation/using-testcafe/common-concepts/browsers/browser-support.html#officially-supported-browsers).
 
@@ -109,9 +75,21 @@ These are all the possible options
 
 	When true, do not capture page HTML or run accessibility audit
 
-* **screenshotDir** `<string>`
+* **screenshots** `<object>`
 
-	Specify the directory in which to save the screenshots
+	Directories in which to save the screenshots
+
+	* **expected** `<string>`
+
+		Directory for expected screenshots - the baseline to compare against
+
+	* **actual** `<string>`
+
+		Directory for actual testrun screenshots
+
+	* **diff** `<string>`
+
+		Directory for resulting diff images
 
 * **singlePage** `<string>` | `<Object>`
 
@@ -131,7 +109,7 @@ These are all the possible options
 
 		Path segments will be appended to the `baseURL` to generate the page under test
 
-	* **paths** `<Array<string>>`
+	* **paths** `<string[]>`
 
 		Path segments to indicate which pages to visit. Include `''` to include the `baseURL`
 
@@ -177,7 +155,7 @@ These are all the possible options
 
 			password for authentication
 
-	* **paths** `<Array<string>>`
+	* **paths** `<string[]>`
 
 		Path segments to indicate which pages to visit. Include `''` to include the `baseURL`
 
@@ -185,7 +163,7 @@ These are all the possible options
 
 		When true, authenticated pages will not be tested
 
-* **resolutions** `<Array<Array<number>>>`
+* **resolutions** `<number[][]>`
 
 	An array of two-element arrays defining `[width, height]` of screen resolutions for screenshot capture
 

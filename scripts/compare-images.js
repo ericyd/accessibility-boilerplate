@@ -1,8 +1,8 @@
 /* ===========================================================
 Test runner to perform image comparison on all screenshots captured.
-Compared files from ./screenshots/expected to ./screenshots/actual.
+Compared files from config.screenshots.expected to config.screenshots.actual
 
-When TestCafe scripts are run, they should output screenshots to ./screenshots/actual,
+When TestCafe scripts are run, they should output screenshots to config.screenshots.actual,
 or the config object can be updated.
 =========================================================== */
 
@@ -14,10 +14,10 @@ const open        = require('open');
 const pixelmatch  = require('pixelmatch');
 const PNG         = require('pngjs').PNG;
 const addContext  = require('mochawesome/addContext');
-const expectedDir = path.resolve(path.dirname(__dirname), 'screenshots', 'expected');
-const actualDir   = path.resolve(path.dirname(__dirname), 'screenshots', 'actual');
-const resultDir   = path.resolve(path.dirname(__dirname), 'screenshots', 'result');
 const config      = require('../config');
+const expectedDir = path.resolve(path.dirname(__dirname), config.screenshots.expected);
+const actualDir   = path.resolve(path.dirname(__dirname), config.screenshots.actual);
+const resultDir   = path.resolve(path.dirname(__dirname), config.screenshots.diff);
 let files;
 
 
