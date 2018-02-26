@@ -1,5 +1,5 @@
 # WCAG Visreg
-A (poorly named) set of scripts to automate accessibility testing (aiming at WCAG Level 2.0 AA compliance) and visual regression ("visreg") testing
+A set of scripts to automate accessibility testing (aiming at WCAG Level 2.0 AA compliance) and visual regression ("visreg") testing
 
 
 
@@ -197,3 +197,9 @@ They make extensive use of the following libraries (also feel free to check out 
 	if you want to see an implementation that uses blink-diff.
 * [mocha](https://mochajs.org/): test runner
 * [mochawesome](https://github.com/adamgruber/mochawesome): excellent report generator with ability to inline image results
+
+
+
+## TODOs
+
+1. Think of a better name for this repository
