@@ -24,7 +24,8 @@ module.exports = {
     screenshots: {
         expected: 'screenshots/expected',
         actual: 'screenshots/actual',
-        diff: 'screenshots/result'
+        diff: 'screenshots/result',
+        threshold: 0.1
     },
 
     // specify single page for test

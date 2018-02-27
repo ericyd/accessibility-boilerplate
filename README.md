@@ -77,7 +77,7 @@ These are all the possible options
 
 * **screenshots** `<object>`
 
-	Directories in which to save the screenshots
+	Options for saving and comparing the screenshots
 
 	* **expected** `<string>`
 
@@ -90,6 +90,10 @@ These are all the possible options
 	* **diff** `<string>`
 
 		Directory for resulting diff images
+
+	* **threshold** `<number>` Default: 0.1
+
+		Point at which image diff will fail. Higher threshold results in fewer failures (more pixels must be different in order to fail).
 
 * **singlePage** `<string>` | `<Object>`
 
