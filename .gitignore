@@ -69,3 +69,5 @@ screenshots/expected
 # alternatively, you can always zip the directory for archiving purposes
 mochawesome-report
 accessibility-audit
+
+*.tmp.json

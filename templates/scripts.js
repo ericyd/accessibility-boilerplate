@@ -1,9 +1,14 @@
-function toggleNextBlock(e) {
-	document.getElementById(e.target.dataset.toggleElement).classList.toggle('expanded');
-	if (e.target.dataset.toggleIcons === "true") {
-		document.getElementById(e.target.dataset.toggleElement + 'plus-icon').classList.toggle('show');
-		document.getElementById(e.target.dataset.toggleElement + 'minus-icon').classList.toggle('show');
-		document.getElementById(e.target.dataset.toggleElement + 'plus-icon').classList.toggle('hide');
-		document.getElementById(e.target.dataset.toggleElement + 'minus-icon').classList.toggle('hide');
-	}
+function toggleNextBlock(e, a, b, c) {
+	var listener = e.currentTarget;
+	// toggle element defined by data-toggle-element
+	document.getElementById(listener.dataset.toggleElement).classList.toggle('expanded');
+	// toggle the arrow icon
+	listener.querySelector('.icon').classList.toggle('is-expanded');
+	// .no-animation supressed animation on load
+	// removing .no-animation on first click ensures it will animate when .is-expanded is removed
+	listener.querySelector('.icon').classList.remove('no-animation');
 }
+
+document.querySelectorAll('.toggler').forEach(function(el) {
+	el.addEventListener('click', toggleNextBlock);
+})

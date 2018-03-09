@@ -106,6 +106,14 @@ const resultFilter = (rawResults, type) => {
         files.map(file => pa11y('file:///' + path.join(dir, file), pa11yOptions))
     )
     .then(function(testRunResults) {
+        // optionally write results to file
+        if (process.argv.includes("writeFile")) {
+            fs.writeFile('pa11y-results.tmp.json',
+                JSON.stringify(fileResults),
+                err => (err && console.error(err))
+            );
+        }
+
         const fileResults = testRunResults.map((result, i, array) => {
             resultIssues = result.issues.map(issue => {
                 let title = issue.code.split('.');
@@ -149,7 +157,14 @@ const resultFilter = (rawResults, type) => {
         
         // render the results into a static html doc
         renderAudit(fileResults);
-    
+
+        // optionally write results to file
+        if (process.argv.includes("writeFile")) {
+            fs.writeFile('results.tmp.json',
+                JSON.stringify(fileResults),
+                err => (err && console.error(err))
+            );
+        }
     })
     .catch(console.log.bind(console));
 })()

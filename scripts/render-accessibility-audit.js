@@ -1,13 +1,17 @@
 const fs = require('fs');
 const pug = require('pug');
 
-function renderAudit(files) {
+/**
+ * Render audit from pa11y results
+ * @param {object} data
+ */
+function renderAudit(data) {
     // Compile the source code
     const compiledFunction = pug.compileFile('templates/main.pug');
     
     // Render a set of data
     const html = compiledFunction({
-        files: files
+        files: data
     });
     
     fs.mkdir('accessibility-audit', err => {
@@ -16,7 +20,7 @@ function renderAudit(files) {
         fs.writeFile('accessibility-audit/results.html', html, function(err) {
             if (err) throw err;
         });
-        fs.writeFile('accessibility-audit/resultsJSON.json', JSON.stringify(files), function(err) {
+        fs.writeFile('accessibility-audit/resultsJSON.json', JSON.stringify(data), function(err) {
             if (err) throw err;
         });
     });
