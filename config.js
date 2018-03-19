@@ -14,11 +14,14 @@ module.exports = {
     // * safari
     browsers: ['firefox:headless'],
 
-    // when true, will not capture or compare screenshots
+    // when truthy, will not capture or compare screenshots
     // skipScreenshots: true,
 
-    // when true, will not capture page HTML or run accessibility audit
+    // when truthy, will not capture page HTML or run accessibility audit
     // skipWCAG: true,
+
+    // when truthy, will get html from the client. Better when testing client-rendered content.
+    // getHTMLFromClient: false,
 
     // directories to which screenshots will be saved
     screenshots: {

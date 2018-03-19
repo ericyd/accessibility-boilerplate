@@ -1,21 +1,21 @@
 {
-  "name": "wcag-visreg",
+  "name": "accessibility-boilerplate",
   "version": "1.0.0",
   "description": "A set of scripts to automate accessibility testing (WCAG) and visual regression ('visreg') testing ",
   "main": "config.js",
-  "directories": {
-    "test": "test"
-  },
+  "directories": {},
   "scripts": {
     "cleanup": "node ./scripts/cleanup.js",
     "capture": "node ./scripts/testcafe-runner.js",
     "capture:expected": "node ./scripts/testcafe-runner.js expected",
     "compare": "mocha ./scripts/compare-images.js --reporter mochawesome",
+    "getHTML": "node ./scripts/get-html-from-server.js",
     "wcag": "node ./scripts/accessibility-runner.js",
     "open": "node ./scripts/open-results.js",
-    "test": "npm run cleanup && npm run capture && npm run wcag && npm run compare"
+    "test": "npm run cleanup && npm run capture && npm run getHTML && npm run wcag && npm run compare"
   },
-  "devDependencies": {},
+  "devDependencies": {
+  },
   "dependencies": {
     "mocha": "^4.0.1",
     "mochawesome": "^3.0.0",
@@ -24,12 +24,14 @@
     "pixelmatch": "^4.0.2",
     "pngjs": "^3.3.2",
     "pug": "^2.0.0-rc.4",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5",
     "rimraf": "^2.6.2",
     "testcafe": "^0.18.5"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ericyd/wcag-visreg.git"
+    "url": "git+https://github.com/ericyd/accessibility-boilerplate.git"
   },
   "keywords": [
     "accessibility",
@@ -37,12 +39,12 @@
     "visual",
     "regression",
     "e2e",
-    "testcafe"
+    "automation"
   ],
   "author": "Eric Dauenhauer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ericyd/wcag-visreg/issues"
+    "url": "https://github.com/ericyd/accessibility-boilerplate/issues"
   },
-  "homepage": "https://github.com/ericyd/wcag-visreg#readme"
+  "homepage": "https://github.com/ericyd/accessibility-boilerplate#readme"
 }

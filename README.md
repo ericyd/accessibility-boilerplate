@@ -3,6 +3,12 @@ A set of scripts to automate accessibility testing (aiming at WCAG Level 2.0 AA 
 
 
 
+## Requirements
+
+Node 8+ (for `util.promisify`)
+
+
+
 ## Setup
 
 ```bash
@@ -67,13 +73,17 @@ These are all the possible options
 
 	Note that you can use Chrome and Firefox in headless mode with `chrome:headless` and `firefox:headless`
 
-* **skipScreenshots** `<boolean>`
+* **skipScreenshots** `<boolean>` Default: `false`
 
-	When true, do not capture or compare screenshots
+	When truthy, do not capture or compare screenshots
 
-* **skipWCAG** `<boolean>`
+* **skipWCAG** `<boolean>` Default: `false`
 
-	When true, do not capture page HTML or run accessibility audit
+	When truthy, do not capture page HTML or run accessibility audit
+
+* **getHTMLFromClient** `<boolean` Default: `false`
+
+	When truthy, will get html from the client. Better when testing client-rendered content
 
 * **screenshots** `<object>`
 
@@ -91,7 +101,7 @@ These are all the possible options
 
 		Directory for resulting diff images
 
-	* **threshold** `<number>` Default: 0.1
+	* **threshold** `<number>` Default: `0.1`
 
 		Point at which image diff will fail. Higher threshold results in fewer failures (more pixels must be different in order to fail).
 
