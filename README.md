@@ -81,10 +81,6 @@ These are all the possible options
 
 	When truthy, do not capture page HTML or run accessibility audit
 
-* **getHTMLFromClient** `<boolean` Default: `false`
-
-	When truthy, will get html from the client. Better when testing client-rendered content
-
 * **screenshots** `<object>`
 
 	Options for saving and comparing the screenshots
@@ -197,6 +193,14 @@ These are all the possible options
 	]
 	```
 
+* **getHTMLFromClient** `<boolean` Default: `true`
+
+	When truthy, will get html from the client. Better when testing client-rendered content
+
+	**NOTE:** authenticated paths *MUST* get HTML from client. Setting to `false` will not work.
+	If you only need to test public paths and you do not need to test client-rendered content,
+	you can comment this out or set to false in `config.js`.
+
 
 ## Dependencies
 
@@ -211,9 +215,3 @@ They make extensive use of the following libraries (also feel free to check out 
 	if you want to see an implementation that uses blink-diff.
 * [mocha](https://mochajs.org/): test runner
 * [mochawesome](https://github.com/adamgruber/mochawesome): excellent report generator with ability to inline image results
-
-
-
-## TODOs
-
-1. Think of a better name for this repository

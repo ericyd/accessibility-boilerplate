@@ -33,7 +33,6 @@ const config = require("../config");
 
       // write files
       await Promise.all(fileWritePromises);
-      // console.log(errors);
     } catch (e) {
       console.error(e);
     }

@@ -21,7 +21,10 @@ module.exports = {
     // skipWCAG: true,
 
     // when truthy, will get html from the client. Better when testing client-rendered content.
-    // getHTMLFromClient: false,
+    // NOTE: authenticated paths MUST get HTML from client. Setting to `false` will not work.
+    // If you only need to test public paths and you do not need to test client-rendered content,
+    // you can comment this out or set to false
+    getHTMLFromClient: true,
 
     // directories to which screenshots will be saved
     screenshots: {
