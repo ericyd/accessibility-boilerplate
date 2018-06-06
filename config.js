@@ -69,11 +69,11 @@ module.exports = {
 
         // path segments to define pages. Will be appended to baseURL
         paths: [
-            'wcag-visreg'
+            'accessibility-boilerplate'
         ],
 
         // true will skip testing for all auth pages
-        // skip: true
+        skip: true
     },
 
     // override default screen resolutions for screenshot capture

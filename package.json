@@ -17,6 +17,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "async": "^2.6.1",
     "mocha": "^4.0.1",
     "mochawesome": "^3.0.0",
     "open": "0.0.5",
