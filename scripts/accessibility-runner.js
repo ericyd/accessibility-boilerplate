@@ -89,18 +89,18 @@ const resultFilter = (rawResults, type) => {
     // execute pa11y audit on each file
     // pa11y returns an array of objects with the following shape:
     // {
-    // 	"documentTitle": "Doc title",
-    // 	"pageUrl": "file:///C:/path/to/file.html",
-    // 	"issues": [{
-    // 		"code": "WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2",
-    // 		"context": "<code-snippet>",
-    // 		"message": "message pertaining to the code",
-    // 		"selector": "css selector for relevant node",
-    // 		"type": "error",
-    // 		"typeCode": 1
-    // 	},
-    // 	...
-    // 	]
+    //  "documentTitle": "Doc title",
+    //  "pageUrl": "file:///C:/path/to/file.html",
+    //  "issues": [{
+    //      "code": "WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2",
+    //      "context": "<code-snippet>",
+    //      "message": "message pertaining to the code",
+    //      "selector": "css selector for relevant node",
+    //      "type": "error",
+    //      "typeCode": 1
+    //  },
+    //  ...
+    //  ]
     // }
     Promise.all(
         files.map(file => pa11y('file:///' + path.join(dir, file), pa11yOptions))
@@ -109,7 +109,7 @@ const resultFilter = (rawResults, type) => {
         // optionally write results to file
         if (process.argv.includes("writeFile")) {
             fs.writeFile('pa11y-results.tmp.json',
-                JSON.stringify(fileResults),
+                JSON.stringify(testRunResults),
                 err => (err && console.error(err))
             );
         }
