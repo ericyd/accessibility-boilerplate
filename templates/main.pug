@@ -2,7 +2,7 @@ mixin file(file)
 	.filename.toggler(data-toggle-element=file.name)
 		h1
 			include arrow.svg
-			span #{file.documentTitle}<br />#{file.name}
+			span #{file.name}
 		h4
 			each category in file.categories
 				span(class="category-pill " + category.resultType) #{category.principles.length} #{category.title}
@@ -50,6 +50,10 @@ html
 			h1 Accessibility audit results
 			p Courtesy of 
 				a(href="https://github.com/pa11y/pa11y", target="_blank") pa11y
+		.summary
+			p Number of pages processed: #{numberOfPages}
+			p Number of pages passed: #{numberOfPagesPass}
+			p Number of errors: #{errors}
 		each file in files
 			.file
 				+file(file)

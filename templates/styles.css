@@ -93,6 +93,12 @@ h3 {
     margin: 3em var(--indent-level-3);
 }
 
+.summary {
+    width: 70%;
+    margin: 0 auto 1em auto;
+    padding: 1em;
+    font-size: 1.25em;
+}
 
 
 

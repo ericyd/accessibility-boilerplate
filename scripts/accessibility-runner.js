@@ -1,17 +1,15 @@
 /* ===========================================================
 Test runner to perform accessibility audits on saved HTML files.
 
-Runs `pa11y` auditor on all files in the /html directory
+Runs `pa11y-ci` auditor on all files in the public URLs of the config
 =========================================================== */
 
 // dependencies
 const fs           = require('fs');
 const path         = require('path');
-const assert       = require('assert');
 const renderAudit  = require('./render-accessibility-audit');
 const wcagMap      = require('./wcag-map');
-const pa11y        = require('pa11y');
-const async        = require('async');
+const pa11yCi      = require('pa11y-ci');
 const config       = require('../config');
 const pa11yOptions = {
     allowedStandards: ['WCAG2AA'], //Defaults to Section508, WCAG2A, WCAG2AA, and WCAG2AAA.
@@ -24,7 +22,6 @@ const root         = path.dirname(__dirname);
 const dir          = path.resolve(root, 'html')
 // get list of files to audit
 const files        = fs.readdirSync(dir);
-
 
 
 const sortBy = prop => {
@@ -84,11 +81,27 @@ const resultFilter = (rawResults, type) => {
         .sort(sortByCode);
 }
 
-function processPa11yResults(err, testRunResults) {
-    if (err) {
-        console.error(err);
-        // console.log(testRunResults);
-    }
+
+// pa11yCi returns an object with the following shape
+// {
+//     "total": 49,
+//     "passes": 1,
+//     "errors": 3904,
+//     "results": {
+//         "http://www.smartfoodservice.com/location": [{
+//             "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.EmptyNoId",
+//             "context": "<a class=\"closeModal\" href=\"\" title=\"Close\" tabindex=\"517\"></a>",
+//             "message": "Anchor element found with no link content and no name and/or ID attribute.",
+//             "type": "error",
+//             "typeCode": 1,
+//             "selector": "html > body > div:nth-child(3) > a"
+//             },
+//            ...
+//          ],
+//          ...
+//      }
+// }
+function processPa11yResults(testRunResults) {
     // optionally write results to file
     if (process.argv.includes("writeFile")) {
         fs.writeFile('pa11y-results.tmp.json',
@@ -97,8 +110,8 @@ function processPa11yResults(err, testRunResults) {
         );
     }
 
-    const fileResults = testRunResults.map((result, i, array) => {
-        resultIssues = result.issues.map(issue => {
+    const fileResults = Object.keys(testRunResults.results).map((page, i, array) => {
+        resultIssues = testRunResults.results[page].map(issue => {
             let title = issue.code.split('.');
             title = {
                 "principle": wcagMap.principle[title[1]],
@@ -130,16 +143,18 @@ function processPa11yResults(err, testRunResults) {
             }
         ];
         return {
-            name: files[i],
-            documentTitle: result.documentTitle,
-            pageUrl: result.pageUrl,
+            name: page,
             categories: categories
         }
-        
     })
     
     // render the results into a static html doc
-    renderAudit(fileResults);
+    renderAudit({
+        numberOfPages: testRunResults.total,
+        numberOfPagesPassed: testRunResults.passes || 0,
+        errors: testRunResults.errors,
+        files: fileResults
+    });
 
     // optionally write results to file
     if (process.argv.includes("writeFile")) {
@@ -150,40 +165,7 @@ function processPa11yResults(err, testRunResults) {
     }
 }
 
-// pa11y returns an array of objects with the following shape:
-// {
-//  "documentTitle": "Doc title",
-//  "pageUrl": "file:///C:/path/to/file.html",
-//  "issues": [{
-//      "code": "WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2",
-//      "context": "<code-snippet>",
-//      "message": "message pertaining to the code",
-//      "selector": "css selector for relevant node",
-//      "type": "error",
-//      "typeCode": 1
-//    },
-//    ...
-//  ]
-// }
-const applyPa11y = async file => {
-    try {
-        return await pa11y('file:///' + path.join(dir, file), pa11yOptions)
-    } catch (e) {
-        return {
-            documentTitle: file,
-            pageUrl: file,
-            issues: [
-                {
-                    code: "Failed to complete Pa11y audit",
-                    context: "",
-                    message: e.message,
-                    type: 'error',
-                    typeCode: 1
-                }
-            ]
-        }
-    }
-};
+const getURLs = () => config.public.paths.map(path => config.public.baseURL + path);
 
 (function accessibilityAudit() {
     if (config.skipWCAG) {
@@ -192,5 +174,7 @@ const applyPa11y = async file => {
     };
 
     // execute pa11y audit on each file
-    async.map(files, applyPa11y, processPa11yResults);
+    pa11yCi(getURLs(), pa11yOptions)
+        .then(processPa11yResults)
+        .catch(console.error.bind(console));
 })()

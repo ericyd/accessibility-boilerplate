@@ -15,7 +15,7 @@ module.exports = {
     browsers: ['firefox:headless'],
 
     // when true, will not capture or compare screenshots
-    // skipScreenshots: true,
+    skipScreenshots: true,
 
     // when true, will not capture page HTML or run accessibility audit
     // skipWCAG: true,
@@ -33,12 +33,61 @@ module.exports = {
 
     // definitions for public pages
     public: {
-        baseURL: 'https://duckduckgo.com/',
+        baseURL: 'http://www.smartfoodservice.com/',
 
         // path segments to define pages. Will be appended to baseURL
         paths: [
             '',
-            '?q=test&ia=web'
+            // 'whatwedo/overview/eligibility/'
+            'home',
+            'location',
+            'specials',
+            'search',
+            'search/fullsearch',
+            'search/departments',
+            'search/beveragecenter',
+            'search/newproducts',
+            'search/temporarypricereductions',
+            'search/cateringsupplies',
+            'search/clickandcarry',
+            'search/cheese',
+            'search/dairy',
+            'search/delimeats',
+            'search/favorites',
+            'search/freshbakery',
+            'search/eventplanning',
+            'search/freshmeats',
+            'search/freshproduce',
+            'search/frozenfood',
+            'search/grocery',
+            'search/janitorialsupplies',
+            'search/paperproducts',
+            'search/smallware',
+            'services',
+            'services/cardsignup',
+            'services/menumanager',
+            'services/professionalservices',
+            'services/coolcarryfoodsafetyprogram',
+            'about',
+            'about/cashandcarrynowsmartfoodservice',
+            'about/cashandcarry',
+            'about/instoretour',
+            'about/eggs',
+            'about/customerconnections',
+            'about/ourvalues',
+            'about/policies',
+            'about/faq',
+            'contact',
+            'contact/careers',
+            'contact/survey2016',
+            'contact/media',
+            'contact/buying',
+            'contact/investorrelations',
+            'privacy',
+            'ccfaq',
+            'ccterms',
+            'unsubscribe',
+            'blocked',
         ],
 
         // true will skip testing for all public pages
