@@ -29,6 +29,7 @@ module.exports = {
     },
 
     // specify single page for test
+    // if none exists, it will use the public and auth objects below
     // singlePage: 'http://www.duckduckgo.com/',
 
     // definitions for public pages
