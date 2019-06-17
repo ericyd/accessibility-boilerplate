@@ -35,16 +35,17 @@ module.exports = {
     },
 
     // specify single page for test
+    // if none exists, it will use the public and auth objects below
     // singlePage: 'http://www.duckduckgo.com/',
 
     // definitions for public pages
     public: {
-        baseURL: 'https://duckduckgo.com/',
+        baseURL: 'http://www.testsite.com/',
 
         // path segments to define pages. Will be appended to baseURL
         paths: [
             '',
-            '?q=test&ia=web'
+            'path1'
         ],
 
         // true will skip testing for all public pages
@@ -75,11 +76,11 @@ module.exports = {
 
         // path segments to define pages. Will be appended to baseURL
         paths: [
-            'wcag-visreg'
+            'accessibility-boilerplate'
         ],
 
         // true will skip testing for all auth pages
-        // skip: true
+        skip: true
     },
 
     // override default screen resolutions for screenshot capture

@@ -93,6 +93,12 @@ h3 {
     margin: 3em var(--indent-level-3);
 }
 
+.summary {
+    width: 70%;
+    margin: 0 auto 1em auto;
+    padding: 1em;
+    font-size: 1.25em;
+}
 
 
 
@@ -145,14 +151,15 @@ Setting the overflow prevents any accidental cutoff of overlapping stroke */
 .icon svg {
     overflow: visible;
     transform-origin: 0px 75px;
+    
     /* for some reason running direction:reverse on expander doesn't work - need a custom animation definition */
-    animation-name: collapser;
-    animation-delay: 0;
-    animation-duration: 0.05s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
+    /* @keyframes duration | timing-function | delay | 
+    iteration-count | direction | fill-mode | play-state | name */
+    -webkit-animation: collapser 0.05s linear 0 1 normal forwards;
+    -moz-animation: collapser 0.05s linear 0 1 normal forwards;
+    -ms-animation: collapser 0.05s linear 0 1 normal forwards;
+    -o-animation: collapser 0.05s linear 0 1 normal forwards;
+    animation: collapser 0.05s linear 0 1 normal forwards;
 }
 
 .icon.no-animation svg {
@@ -163,13 +170,14 @@ Setting the overflow prevents any accidental cutoff of overlapping stroke */
 .icon.is-expanded svg {
     fill: var(--dark);
     transform-origin: 0px 75px;
-    animation-name: expander;
-    animation-delay: 0;
-    animation-duration: 0.05s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
+
+    /* @keyframes duration | timing-function | delay | 
+    iteration-count | direction | fill-mode | play-state | name */
+    -webkit-animation: expander 0.05s linear 0 1 normal forwards;
+    -moz-animation: expander 0.05s linear 0 1 normal forwards;
+    -ms-animation: expander 0.05s linear 0 1 normal forwards;
+    -o-animation: expander 0.05s linear 0 1 normal forwards;
+    animation: expander 0.05s linear 0 1 normal forwards;
 }
 
 .toggler:hover .icon,
@@ -193,6 +201,62 @@ Setting the overflow prevents any accidental cutoff of overlapping stroke */
 }
 
 @keyframes collapser {
+    0% {
+        -ms-transform: rotate(45deg); /* IE 9 */
+        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+        transform: rotate(45deg);
+    }
+    
+    100% {
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+    }
+}
+
+@-webkit-keyframes expander {
+    0% {
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -ms-transform: rotate(45deg); /* IE 9 */
+        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+        transform: rotate(45deg);
+    }
+}
+
+@-webkit-keyframes collapser {
+    0% {
+        -ms-transform: rotate(45deg); /* IE 9 */
+        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+        transform: rotate(45deg);
+    }
+    
+    100% {
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+    }
+}
+
+@-ms-keyframes expander {
+    0% {
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -ms-transform: rotate(45deg); /* IE 9 */
+        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+        transform: rotate(45deg);
+    }
+}
+
+@-ms-keyframes collapser {
     0% {
         -ms-transform: rotate(45deg); /* IE 9 */
         -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */

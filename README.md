@@ -1,4 +1,15 @@
-# WCAG Visreg
+# Deprecated
+
+This has been split into two repositories. They were too loosely connected to justify one repo.
+
+1. <https://github.com/ericyd/pa11y-reporter>
+2. <https://github.com/ericyd/visual-regression>
+
+
+# Old Docs
+
+## WCAG Visreg
+
 A set of scripts to automate accessibility testing (aiming at WCAG Level 2.0 AA compliance) and visual regression ("visreg") testing
 
 

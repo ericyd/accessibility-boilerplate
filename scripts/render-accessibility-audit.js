@@ -10,9 +10,7 @@ function renderAudit(data) {
     const compiledFunction = pug.compileFile('templates/main.pug');
     
     // Render a set of data
-    const html = compiledFunction({
-        files: data
-    });
+    const html = compiledFunction(data);
     
     fs.mkdir('accessibility-audit', err => {
         if (err && err.message.indexOf('file already exists') === -1) throw err;
