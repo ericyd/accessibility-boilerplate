@@ -14,11 +14,17 @@ module.exports = {
     // * safari
     browsers: ['firefox:headless'],
 
-    // when true, will not capture or compare screenshots
-    skipScreenshots: true,
+    // when truthy, will not capture or compare screenshots
+    // skipScreenshots: true,
 
-    // when true, will not capture page HTML or run accessibility audit
+    // when truthy, will not capture page HTML or run accessibility audit
     // skipWCAG: true,
+
+    // when truthy, will get html from the client. Better when testing client-rendered content.
+    // NOTE: authenticated paths MUST get HTML from client. Setting to `false` will not work.
+    // If you only need to test public paths and you do not need to test client-rendered content,
+    // you can comment this out or set to false
+    getHTMLFromClient: true,
 
     // directories to which screenshots will be saved
     screenshots: {
